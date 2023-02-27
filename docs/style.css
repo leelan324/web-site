@@ -30,12 +30,13 @@ body {
     width: 75%;
     display: flex;
     align-items: center;
+    font-size: 42px;
 }
 
 @media only screen and (max-device-width: 750px) {
     .head-border {
         width: 100%;
-        font-size: 24px;
+        font-size: 32px;
     }
 }
 
@@ -61,12 +62,12 @@ body {
     margin-left: auto;
     margin-right: auto;
     text-align: center;
-    font-size: 60px;
+    font-size: 100px;
 }
 
 @media only screen and (max-device-width: 750px) {
     .title {
-        font-size: 48px;
+        font-size: 60px;
     }
 }
 
@@ -82,35 +83,6 @@ body {
     .text {
         width: 100%;
     }
-}
-
-.lineex {
-    width: 230px;
-    margin-top: 20px;
-    margin-bottom: 40px;
-    margin-left: 40px;
-    margin-right: 40px;
-    display: inline-block;
-    text-align: left;
-    vertical-align: top;
-    padding: 0.5em 1em;
-    color: #232323;
-    background: #fff8e8;
-    border-left: solid 10px #ffc06e;
-}
-
-@media only screen and (max-device-width: 750px) {
-    .lineex {
-        margin-top: 10px;
-        margin-bottom: 40px;
-        margin-left: 30px;
-        margin-right: 30px;
-    }
-}
-
-.lineex p {
-    margin: 0;
-    padding: 0;
 }
 
 footer {
