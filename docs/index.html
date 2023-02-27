@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html lang="ja">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" >
-		<meta name="theme-color" content="#fff">
-		<!-- <meta name="apple-mobile-web-app-status-bar-style" content="default"> -->
-		<!-- <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png"> -->
-		<!-- <link rel="icon" href="favicon.ico"> -->
-		<title>王獣舎</title>
-		
-		<!-- <link rel="manifest" href="manifest.json"> -->
-		
-		<!-- <script>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+	<meta name="theme-color" content="#fff">
+	<!-- <meta name="apple-mobile-web-app-status-bar-style" content="default"> -->
+	<!-- <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png"> -->
+	<!-- <link rel="icon" href="favicon.ico"> -->
+	<title>王獣舎</title>
+
+	<!-- <link rel="manifest" href="manifest.json"> -->
+
+	<!-- <script>
 		if ('serviceWorker' in navigator) {
     	navigator.serviceWorker.register('service-worker.js').then(function(registration) {
         	console.log('ServiceWorker registration successful with scope: ', registration.scope);
@@ -20,166 +21,50 @@
     	});
     	}
 		</script> -->
-		
-		<!-- <script type="text/javascript" src="jquery-3.6.0.min.js"></script> -->
-		
-		<style>
-			body{
-				font-family: "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Meiryo", sans-serif;
-				background-color: #fff;
-			}
-			
-			@media (prefers-color-scheme: dark) {
-  				body {
-    				background-color: #000;
-    				color: #fff;
-  				}
-			}
 
-			.mpart{
-				border-width: 0;
-				height: 2px;
-				background-color: #000;
- 				content: "";
- 				display: block;
-			}
-			@media (prefers-color-scheme: dark) {
-  				.mpart {
-    				background-color: #fff;
-  				}
-			}
-			
- 			.head-border {
- 				margin-right:auto;
- 				margin-left:auto;
- 				width: 75%;
-    			display: flex;
-    			align-items: center;
-			}
-			@media only screen and (max-device-width: 750px){
-  				.head-border{
- 		  			width: 100%;
- 		  			font-size: 24px;
-  				}
- 			}
- 			
-			.head-border:before,
-			.head-border:after {
-    			content: "";
-   				height: 3px;
-    			flex-grow: 1;
-    			background-color: #00ffff;
-			}
-			
-			.head-border:before {
-    			margin-right: 1rem;
-			}
-			
-			.head-border:after {
-    			margin-left: 1rem;
-			}
-			
-			.title {
- 				margin-top: 20px;
- 				margin-bottom: 20px;
- 				margin-left: auto;
- 				margin-right: auto;
-				text-align: center;
-				font-size: 60px;
-			}
-			@media only screen and (max-device-width: 750px){
-  				.title{
- 		  			font-size: 48px;
-  				}
- 			}
+	<link rel="stylesheet" href="style.css">
+	<!-- <script type="text/javascript" src="jquery-3.6.0.min.js"></script> -->
+</head>
 
-			.text {
-				margin-right: auto;
-				margin-left: auto;
-				width: 75%;
-				text-align: center;
-				font-size: 16px;
-			}
-			@media only screen and (max-device-width: 750px){
-  				.text {
- 		  			width: 100%;
-  				}
- 			}
-			
- 			.lineex {
- 				width: 230px;
- 				margin-top: 20px;
- 				margin-bottom: 40px;
- 				margin-left: 40px;
-				margin-right: 40px;
-				display: inline-block;
-				text-align: left;
-				vertical-align: top;
-				padding: 0.5em 1em;
-    			color: #232323;
-   				background: #fff8e8;
-    			border-left: solid 10px #ffc06e;
- 			}
-			@media only screen and (max-device-width: 750px){
-  				.lineex {
- 				margin-top: 10px;
- 				margin-bottom: 40px;
- 				margin-left: 30px;
-				margin-right: 30px;
-  				}
- 			}
- 			.lineex p {
-    			margin: 0; 
-    			padding: 0;
-			}
- 			
- 			footer {
- 				 text-align: center;
- 			}
-			@media only screen and (max-device-width: 750px){
-  				footer {
- 		  			font-size: 11px;
-  				}
- 			}
-		</style>
-	</head>
-	<body>
-		<div id="tpart">
-			<h1 class="title">
-				王獣舎
-			</h1>
-		</div>
-		<br>
+<body>
+	<div id="top_title">
+		<h1 class="title">王獣舎</h1>
+	</div>
+	<br>
+	<div class="text" style="text-align: left">
+		<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button"
+			data-show-count="false">Tweet</a>
+		<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script><br>
+		最新の状態に更新されない場合は<a href="../web-site">ここ</a>をクリックしてください。<br>
+	</div>
+	<br>
+	<div id="notification">
+		<h1 class="head-border">お知らせ</h1>
 		<div class="text" style="text-align: left">
-			<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script><br>
-			最新の状態に更新されない場合は<a href="../hzlink">ここ</a>をクリックしてください。<br>
+			<ul>
+				<li>現在お知らせはありません。</li>
+			</ul>
 		</div>
-		<br>
-		<div id="notification">
-			<h1 class="head-border">お知らせ</h1>
-			<div class="text" style="text-align: left">
-				<ul>
-					<li>現在お知らせはありません。</li>
-				</ul>
-			</div>
+	</div>
+	<br>
+	<div id="link">
+		<h1 class="head-border">リンク</h1>
+		<div class="text" style="text-align: left">
+			<ul>
+				<li><a href="divisor_v2/">約数計算機 v2</a></li>
+				<li><a href="lightning/">落雷距離計算機</a></li>
+				<li><a href="https://leelan324.github.io/tsunami/">津波情報マップ(暫定版)</a></li>
+			</ul>
 		</div>
-		<br>
-		<div id="link">
-			<h1 class="head-border">リンク</h1>
-			<div class="text" style="text-align: left">
-				<ul>
-					<li><a href="divisor_v2/">約数計算機 v2</a></li>
-					<li><a href="lightning/">落雷距離計算機</a></li>
-					<li><a href="https://leelan324.github.io/tsunami/">津波情報マップ(暫定版)</a></li>
-				</ul>
-			</div>
-		</div>
-		<br>
-		<div id="line">
-			<hr class="mpart">
-		</div>
-		<footer>
-			Copyright &copy; 2020-2023 <a href="https://twitter.com/leelan324" target="_blank" rel="noopener noreferrer">leelan324</a> All Rights Reserved.
-		</footer>
-	</body>
+	</div>
+	<br>
+	<div id="line">
+		<hr class="mpart">
+	</div>
+	<footer>
+		Copyright &copy; 2020-2023 <a href="https://twitter.com/leelan324" target="_blank"
+			rel="noopener noreferrer">leelan324</a> All Rights Reserved.
+	</footer>
+</body>
+
 </html>

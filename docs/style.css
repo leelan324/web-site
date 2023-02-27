@@ -1,0 +1,124 @@
+body {
+    font-family: "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Meiryo", sans-serif;
+    background-color: #fff;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #000;
+        color: #fff;
+    }
+}
+
+.mpart {
+    border-width: 0;
+    height: 2px;
+    background-color: #000;
+    content: "";
+    display: block;
+}
+
+@media (prefers-color-scheme: dark) {
+    .mpart {
+        background-color: #fff;
+    }
+}
+
+.head-border {
+    margin-right: auto;
+    margin-left: auto;
+    width: 75%;
+    display: flex;
+    align-items: center;
+}
+
+@media only screen and (max-device-width: 750px) {
+    .head-border {
+        width: 100%;
+        font-size: 24px;
+    }
+}
+
+.head-border:before,
+.head-border:after {
+    content: "";
+    height: 3px;
+    flex-grow: 1;
+    background-color: #00ffff;
+}
+
+.head-border:before {
+    margin-right: 1rem;
+}
+
+.head-border:after {
+    margin-left: 1rem;
+}
+
+.title {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-size: 60px;
+}
+
+@media only screen and (max-device-width: 750px) {
+    .title {
+        font-size: 48px;
+    }
+}
+
+.text {
+    margin-right: auto;
+    margin-left: auto;
+    width: 75%;
+    text-align: center;
+    font-size: 16px;
+}
+
+@media only screen and (max-device-width: 750px) {
+    .text {
+        width: 100%;
+    }
+}
+
+.lineex {
+    width: 230px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    margin-left: 40px;
+    margin-right: 40px;
+    display: inline-block;
+    text-align: left;
+    vertical-align: top;
+    padding: 0.5em 1em;
+    color: #232323;
+    background: #fff8e8;
+    border-left: solid 10px #ffc06e;
+}
+
+@media only screen and (max-device-width: 750px) {
+    .lineex {
+        margin-top: 10px;
+        margin-bottom: 40px;
+        margin-left: 30px;
+        margin-right: 30px;
+    }
+}
+
+.lineex p {
+    margin: 0;
+    padding: 0;
+}
+
+footer {
+    text-align: center;
+}
+
+@media only screen and (max-device-width: 750px) {
+    footer {
+        font-size: 11px;
+    }
+}
