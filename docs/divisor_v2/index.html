@@ -36,7 +36,7 @@
 	</head>
 	<body>
 		<h1 class="title">約数計算機 v3</h1>
-		<p>自然数を入力してください！</p>
+		<p>自然数を入力してください！<br>※数が大きいと計算に時間がかかります。</p>
 		<input type="number" id="num" step="1" />
 		<input type="button" value="実行" onclick="clickBtn1()" />
 		<br><br>
@@ -55,12 +55,22 @@
 					const s1 = document.getElementById("s1");
 					s1.insertAdjacentHTML("beforeend","計算結果は<br>");
 					let i;
+					let j=0;
 					for(let i = 1; i <= a; i++){
 						if(a%i == 0){
 							s1.insertAdjacentHTML("beforeend","・"+i+"<br>");
+							j++;
 						}
 					}
 					s1.insertAdjacentHTML("beforeend","です！<br><br>");
+					let prime;
+					if(j == 2){
+						prime = "素数";
+					}else{
+						prime = "素数ではない";
+					}
+					s1.insertAdjacentHTML("beforeend","ちなみに...<br>");
+					s1.insertAdjacentHTML("beforeend","「"+a+"」は"+prime+"！<br><br>");
 				}
 			}
 		</script>
