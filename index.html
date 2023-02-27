@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" >
+		<meta name="theme-color" content="#fff">
+		<meta name="apple-mobile-web-app-status-bar-style" content="default">
+		<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+		<link rel="icon" href="favicon.ico">
+		<title>Oscilloscope!!</title>
+		
+		<link rel="manifest" href="manifest.json">
+		
+		<script>
+		if ('serviceWorker' in navigator) {
+    	navigator.serviceWorker.register('service-worker.js').then(function(registration) {
+        	console.log('ServiceWorker registration successful with scope: ', registration.scope);
+		}).catch(function(err) {
+        	console.log('ServiceWorker registration failed: ', err);
+    	});
+    	}
+		</script>
+		
+		<script type="text/javascript" src="jquery-3.6.0.min.js"></script>
+		
+		<!-- ハザッス!!遊厨部!! -->
+		<script>
+		var hzs = "";
+		$.ajax({
+			type: 'GET',
+		  	url: 'https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UCOGneaNRwv9_5guAM0DmhOg&key=AIzaSyAazqLZ1rxcxT3Z_qfjJTVMk5A0Rx26G9w',
+		 	datatype: 'json',
+		 	async: false,
+		}).done(function (json) {
+		  		num = json.items.length;
+		    	for(var i = 0; i < num ; i++){
+		    		hzs = json.items[i].statistics.subscriberCount;
+		  		}
+		  	}
+		)
+		</script>
+		
+		<!-- リベロの部室 -->
+		<script>
+		var lbs = "";
+		$.ajax({
+			type: 'GET',
+		  	url: 'https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UCk_zdfZ4J7c0wysDk-AlTgA&key=AIzaSyAazqLZ1rxcxT3Z_qfjJTVMk5A0Rx26G9w',
+		 	datatype: 'json',
+		 	async: false,
+		}).done(function (json) {
+		  		num = json.items.length;
+		    	for(var i = 0; i < num ; i++){
+					lbs = json.items[i].statistics.subscriberCount;
+		  		}
+		  	}
+		)
+		</script>
+		
+		<!-- リベロのオカルト研究会!! -->
+		<script>
+		var lcs = "";
+		$.ajax({
+			type: 'GET',
+		  	url: 'https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UC_d04ex-h8gXjBmGMtid9Dg&key=AIzaSyAazqLZ1rxcxT3Z_qfjJTVMk5A0Rx26G9w',
+		 	datatype: 'json',
+		 	async: false,
+		}).done(function (json) {
+		  		num = json.items.length;
+		    	for(var i = 0; i < num ; i++){
+					lcs = json.items[i].statistics.subscriberCount;
+		  		}
+		  	}
+		)
+		</script>
+		
+		<!-- リベロP -->
+		<script>
+		var lps = "";
+		$.ajax({
+			type: 'GET',
+		  	url: 'https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UCWYnMh8xY811DH8cb71fbUg&key=AIzaSyAazqLZ1rxcxT3Z_qfjJTVMk5A0Rx26G9w',
+		 	datatype: 'json',
+		 	async: false,
+		}).done(function (json) {
+		  		num = json.items.length;
+		    	for(var i = 0; i < num ; i++){
+					lps = json.items[i].statistics.subscriberCount;
+		  		}
+		  	}
+		)
+		</script>
+		
+		<!-- ハザッス!!ゲーム愛好会!! -->
+		<script>
+		var hgs = "";
+		$.ajax({
+			type: 'GET',
+		  	url: 'https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UC0tX7rAh_xvj06hOxxUk76A&key=AIzaSyAazqLZ1rxcxT3Z_qfjJTVMk5A0Rx26G9w',
+		 	datatype: 'json',
+		 	async: false,
+		 }).done(function (json) {
+		  		num = json.items.length;
+		    	for(var i = 0; i < num ; i++){
+					hgs = json.items[i].statistics.subscriberCount;
+		  		}
+		  	}
+		)
+		</script>
+		
+		<!-- ハザッス!!ワンピース修業寺!! -->
+		<script>
+		var hos = "";
+		$.ajax({
+			type: 'GET',
+		  	url: 'https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UCac1PTUKHCy9rpTaDQxvQKw&key=AIzaSyAazqLZ1rxcxT3Z_qfjJTVMk5A0Rx26G9w',
+		 	datatype: 'json',
+		 	async: false,
+		}).done(function (json) {
+		  		num = json.items.length;
+		    	for(var i = 0; i < num ; i++){
+					hos = json.items[i].statistics.subscriberCount;
+				}
+		  	}
+		 )
+		</script>
+
+		<!-- ベガ【ソフトバレー】 -->
+		<script>
+			var vgs = "";
+			$.ajax({
+				type: 'GET',
+				  url: 'https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UC1IyTGn1G4usAyHZaw11G7w&key=AIzaSyAazqLZ1rxcxT3Z_qfjJTVMk5A0Rx26G9w',
+				 datatype: 'json',
+				 async: false,
+			}).done(function (json) {
+					  num = json.items.length;
+					for(var i = 0; i < num ; i++){
+						vgs = json.items[i].statistics.subscriberCount;
+					}
+				  }
+			 )
+			</script>
+		
+		<style>
+			body{
+				font-family: "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Meiryo", sans-serif;
+				background-color: #fff;
+			}
+			
+			@media (prefers-color-scheme: dark) {
+  				body {
+    				background-color: #000;
+    				color: #fff;
+  				}
+			}
+			 			
+ 			.video {
+ 				font-size: 48px;
+ 			}
+			@media only screen and (max-device-width: 750px){
+  				.video{
+ 		  			font-size: 30px;
+  				}
+ 			}
+ 			
+			.mpart{
+				border-width: 0;
+				height: 2px;
+				background-color: #000;
+ 				content: "";
+ 				display: block;
+			}
+			@media (prefers-color-scheme: dark) {
+  				.mpart {
+    				background-color: #fff;
+  				}
+			}
+			
+			#tpart {
+ 				margin-top: 20px;
+ 				margin-bottom: 20px;
+ 				margin-left: auto;
+ 				margin-right: auto;
+				width: 75%;
+				border-top: 8px dotted #00ffff;
+				border-bottom: 8px dotted #00ffff;
+			}
+			@media only screen and (max-device-width: 750px){
+  				#tpart{
+ 		  			width: 100%;
+  				}
+ 			}
+			
+			.title {
+ 				margin-top: 20px;
+ 				margin-bottom: 20px;
+ 				margin-left: auto;
+ 				margin-right: auto;
+				text-align: center;
+				font-size: 60px;
+			}
+			@media only screen and (max-device-width: 750px){
+  				.title{
+ 		  			font-size: 48px;
+  				}
+ 			}
+			
+ 			.head-border {
+ 				margin-right:auto;
+ 				margin-left:auto;
+ 				width: 75%;
+    			display: flex;
+    			align-items: center;
+			}
+			@media only screen and (max-device-width: 750px){
+  				.head-border{
+ 		  			width: 100%;
+ 		  			font-size: 24px;
+  				}
+ 			}
+ 			
+			.head-border:before,
+			.head-border:after {
+    			content: "";
+   				height: 3px;
+    			flex-grow: 1;
+    			background-color: #00ffff;
+			}
+			
+			.head-border:before {
+    			margin-right: 1rem;
+			}
+			
+			.head-border:after {
+    			margin-left: 1rem;
+			}
+			
+			.text {
+				margin-right: auto;
+				margin-left: auto;
+				width: 75%;
+				text-align: center;
+				font-size: 16px;
+			}
+			@media only screen and (max-device-width: 750px){
+  				.text {
+ 		  			width: 100%;
+  				}
+ 			}
+ 			
+ 			.contxt {
+ 				font-size: 80px;
+ 				font-weight: bold;
+ 			}
+			@media only screen and (max-device-width: 750px){
+  				.contxt {
+ 		  			width: 100%;
+ 		  			font-size: 30px;
+  				}
+ 			}
+ 			
+ 			.sub {
+ 				font-size: 24px;
+ 			}
+ 			
+ 			.subtitle {
+ 				display: inline-block;
+ 				width: 10em;
+ 				text-align: left;
+ 			}
+ 			
+ 			.subtitleb {
+ 				display: inline-block;
+ 				width: 8em;
+ 				text-align: left;
+ 			}
+ 			
+ 			.sdata {
+ 				display: inline-block;
+ 				width: 60px;
+ 				text-align: right;
+ 			}
+ 			
+ 			.sdatab {
+ 				display: inline-block;
+ 				width: 120px;
+ 				text-align: right;
+ 				font-size: 42px;
+ 				color: #f00;
+ 			}
+ 			
+ 			iframe {
+ 				max-width: 100%;
+ 			}
+ 			@media only screen and (max-device-width: 750px){
+  				iframe {
+  					height: 600px;
+  				}
+ 			}
+			
+			.altpic {
+				width: 75%;
+			}
+ 			
+ 			.chicon {
+ 				margin: 20px;
+				display: inline-block;
+ 			}
+			@media only screen and (max-device-width: 750px){
+  				.chicon {
+  				margin: 10px;
+				display: inline-block;
+  				}
+ 			}
+ 			
+ 			.chr {
+ 				border-radius: 50%;
+ 			}
+ 			
+ 			.snsicon {
+ 				margin-top: auto;
+ 				margin-bottom: auto;
+				margin-right: 20px;
+				margin-left: 20px;
+				display: inline-block;
+ 			}
+			@media only screen and (max-device-width: 750px){
+  				.snsicon {
+  				margin: 10px;
+				display: inline-block;
+  				}
+ 			}
+ 			
+ 			.btn {
+ 				width: 60%;
+ 				margin-top: 20px;
+ 				margin-bottom: 20px;
+				margin-right: auto;
+				margin-left: auto;
+			  	border-radius: 20px;
+			  	background-color: #00ffff;
+			  	padding: 10px;
+			  	text-align: center;
+			  	font-size: 24px;
+			}
+			@media only screen and (max-device-width: 750px){
+  				.btn {
+  					width: 90%;
+ 		  			font-size: 18px
+  				}
+ 			}
+ 			
+ 			.twitch {
+ 				width: 60%;
+ 				margin-top: 20px;
+ 				margin-bottom: 20px;
+				margin-right: auto;
+				margin-left: auto;
+			  	border-radius: 20px;
+			  	background-color: #9147FF;
+			  	padding: 10px;
+			  	text-align: center;
+			  	font-size: 24px;
+			}
+			@media only screen and (max-device-width: 750px){
+  				.twitch {
+  					width: 90%;
+ 		  			font-size: 18px
+  				}
+ 			}
+ 			
+ 			.btnlink {
+			  	text-decoration: none;
+			  	color: #000;
+			}
+ 			
+ 			.lineicon {
+ 				width: 230px;
+ 				margin: 20px;
+				display: inline-block;
+ 			}
+			@media only screen and (max-device-width: 750px){
+  				.lineicon {
+ 				width: 175px;
+ 				margin-top: 10px;
+ 				margin-bottom: auto;
+				margin-right: auto;
+				margin-left: auto;
+  				}
+ 			}
+ 			
+ 			.caption {
+ 				margin-top: 10px;
+ 				margin-bottom: auto;
+ 				text-align: center;
+				font-size: 24px;
+			}
+			@media only screen and (max-device-width: 750px){
+  				.caption {
+ 				margin-top: 10px;
+ 				margin-bottom: auto;
+ 				text-align: center;
+				font-size: 18px;
+  				}
+ 			}
+			
+ 			.lineex {
+ 				width: 230px;
+ 				margin-top: 20px;
+ 				margin-bottom: 40px;
+ 				margin-left: 40px;
+				margin-right: 40px;
+				display: inline-block;
+				text-align: left;
+				vertical-align: top;
+				padding: 0.5em 1em;
+    			color: #232323;
+   				background: #fff8e8;
+    			border-left: solid 10px #ffc06e;
+ 			}
+			@media only screen and (max-device-width: 750px){
+  				.lineex {
+ 				margin-top: 10px;
+ 				margin-bottom: 40px;
+ 				margin-left: 30px;
+				margin-right: 30px;
+  				}
+ 			}
+ 			.lineex p {
+    			margin: 0; 
+    			padding: 0;
+			}
+ 			
+ 			footer {
+ 				 text-align: center;
+ 			}
+			@media only screen and (max-device-width: 750px){
+  				footer {
+ 		  			font-size: 11px;
+  				}
+ 			}
+		</style>
+	</head>
+	<body>
+		<div id="tpart">
+			<h1 class="title">
+				Oscilloscope!!
+			</h1>
+		</div>
+		<br>
+		<div class="text" style="text-align: left">
+			<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script><br>
+			最新の状態に更新されない場合は<a href="../hzlink">ここ</a>をクリックしてください。<br>
+		</div>
+		<br>
+		<div id="notification">
+			<h1 class="head-border">お知らせ</h1>
+			<!--
+			<div class="text" style="text-align: left">
+			現在お知らせはありません。
+			</div>
+			-->
+			<div class="text">
+				<div class="contxt">
+					<div style="color: #FF4001">登録者合計11,000人</div><div style="color: #3BE640">おめでとうございます!!</div>
+				</div>
+			</div>
+		</div>
+		<div id="latestvideo">
+			<h1 class="head-border">最新の動画</h1>
+			<div class="text">
+				<a href="latest/" class="video">こちらから!!</a>
+			</div>
+		</div>
+		<div id="schedule">
+			<h1 class="head-border">投稿動画と予定</h1>
+			<div class="text">
+				<iframe src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23039BE5&amp;ctz=Asia%2FTokyo&amp;src=aHo4MTlsaWxhbkBnbWFpbC5jb20&amp;src=amEuamFwYW5lc2UjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&amp;color=%23039BE5&amp;color=%230B8043" style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+				<div style="text-align: left">
+				―凡例―<br>
+				【遊】：ハザッス!!遊厨部!!<br>
+				【部】：リベロの部室<br>
+				【リ】：リベロP<br>
+				【オ】：リベロのオカルト研究会!!<br>
+				【ゲ】：ハザッス!!ゲーム愛好会!!<br>
+				【ワ】：ハザッス!!ワンピース修行寺!!<br>
+				【ベ】：ベガ【ソフトバレー】<br>
+				●：生配信
+				</div>
+			</div>
+		</div>
+		<div id="subscriber">
+			<h1 class="head-border">登録者数</h1>
+			<div class="text">
+				<div class="sub">
+					<span class="subtitle">ハザッス!!遊厨部!!：</span>
+					<span class="sdata"><script>document.write(Number(hzs))</script></span>
+				</div>
+				<div class="sub">
+					<span class="subtitle">リベロの部室：</span>
+					<span class="sdata"><script>document.write(Number(lbs))</script></span>
+				</div>
+				<div class="sub">
+					<span class="subtitle">リベロP：</span>
+					<span class="sdata"><script>document.write(Number(lps))</script></span>
+				</div>
+				<div class="sub">
+					<span class="subtitle">オカルト研究会!!：</span>
+					<span class="sdata"><script>document.write(Number(lcs))</script></span>
+				</div>
+				<div class="sub">
+					<span class="subtitle">ゲーム愛好会!!：</span>
+					<span class="sdata"><script>document.write(Number(hgs))</script></span>
+				</div>
+				<div class="sub">
+					<span class="subtitle">ワンピース修業寺!!：</span>
+					<span class="sdata"><script>document.write(Number(hos))</script></span>
+				</div>
+				<div class="sub">
+					<span class="subtitle">ベガ：</span>
+					<span class="sdata"><script>document.write(Number(vgs))</script></span>
+				</div>
+				<br>
+				<div class="sub">
+					<span class="subtitleb">6チャンネル計：</span>
+					<span class="sdatab">
+							<script>
+								sum = Number(hzs)+Number(lbs)+Number(lps)+Number(lcs)+Number(hgs)+Number(hos)+Number(vgs)
+								document.write(Number(sum))
+							</script>
+					</span>
+				</div>
+				<div class="sub">
+					<span class="subtitleb">合計2万人まで：</span>
+					<span class="sdatab">
+							<script>
+								ato = 20000-Number(sum)
+								document.write(Number(ato))
+							</script>
+					</span>
+				</div>
+			</div>
+		</div>
+		<div id="ch">
+			<h1 class="head-border">チャンネル一覧</h1>
+			<div class="text">
+				<div class="chicon">
+					<a href="https://www.youtube.com/channel/UCOGneaNRwv9_5guAM0DmhOg" target="_blank" rel="noopener noreferrer">
+						<img src="hazass.png" width="80" height="80" class="chr"/>
+					</a>
+				</div>
+				<div class="chicon">
+					<a href="https://www.youtube.com/channel/UCk_zdfZ4J7c0wysDk-AlTgA" target="_blank" rel="noopener noreferrer">
+						<img src="libero.png" width="80" height="80" class="chr"/>
+					</a>
+				</div>
+				<div class="chicon">
+					<a href="https://www.youtube.com/channel/UCWYnMh8xY811DH8cb71fbUg" target="_blank" rel="noopener noreferrer">
+						<img src="liberop.png" width="80" height="80" class="chr"/>
+					</a>
+				</div>
+				<div class="chicon">
+					<a href="https://www.youtube.com/channel/UC_d04ex-h8gXjBmGMtid9Dg" target="_blank" rel="noopener noreferrer">
+						<img src="occult.png" width="80" height="80" class="chr"/>
+					</a>
+				</div>
+				<div class="chicon">
+					<a href="https://www.youtube.com/channel/UC0tX7rAh_xvj06hOxxUk76A" target="_blank" rel="noopener noreferrer">
+						<img src="game.png" width="80" height="80" class="chr"/>
+					</a>
+				</div>
+				<div class="chicon">
+					<a href="https://www.youtube.com/channel/UCac1PTUKHCy9rpTaDQxvQKw" target="_blank" rel="noopener noreferrer">
+						<img src="one.png" width="80" height="80" class="chr"/>
+					</a>
+				</div>
+				<div class="chicon">
+					<a href="https://www.youtube.com/channel/UC1IyTGn1G4usAyHZaw11G7w" target="_blank" rel="noopener noreferrer">
+						<img src="vega.png" width="80" height="80" class="chr"/>
+					</a>
+				</div>
+			</div>
+		</div>
+		<div id="sns">
+			<h1 class="head-border">SNS・ブログ・グッズ</h1>
+			<div class="text">
+				<div class="snsicon">
+					<a href="https://twitter.com/D_338633?s=20" target="_blank" rel="noopener noreferrer">
+						<img src="Twitter.png" width="80" height="80"/>
+					</a>
+				</div>
+				<div class="snsicon">
+					<a href="https://www.instagram.com/d_338633/" target="_blank" rel="noopener noreferrer">
+						<img src="Instagram.png" width="80" height="80"/>
+					</a>
+				</div>
+				<div class="btn">
+					<a href="https://liberop33.wpcomstaging.com/blog/" target="_blank" rel="noopener noreferrer" class="btnlink">
+						ハザッス!!遊厨部!!活動記録
+					</a>
+				</div>
+				<div class="btn">
+					<a href="https://vt.tiktok.com/ZS4AaWcA/" target="_blank" rel="noopener noreferrer" class="btnlink">
+						ハザッス!!宣伝部!!(TikTok)
+					</a>
+				</div>
+				<div class="btn">
+					<a href="https://hazassu.base.shop/" target="_blank" rel="noopener noreferrer" class="btnlink">
+						ハザッス!!物販店!!
+					</a>
+				</div>
+				<div class="twitch">
+					<a href="https://www.twitch.tv/liberop_33" target="_blank" rel="noopener noreferrer" class="btnlink">
+						Twitch
+					</a>
+				</div>
+			</div>
+		</div>
+		<div id="ochat">
+			<h1 class="head-border">オープンチャット</h1>
+			<div class="text">
+				<div class="lineicon">
+					<a href="https://line.me/ti/g2/6Y3EDPYY4LiQ8mL-I43RDA" target="_blank" rel="noopener noreferrer">
+						<img src="LINE.png" width="80" height="80"/>
+					</a>
+					<p class="caption">
+					ハザッス!!の駄弁り場
+					</p>
+				</div>
+				<div class="lineex">
+					ハザッス!!遊厨部!!のメンバー、<br>
+					視聴者の皆様で楽しく駄弁る場<br>
+					です！(^^)
+				</div>
+				<br>
+				<div class="lineicon">
+					<a href="https://line.me/ti/g2/lj4TMwG3Y--4ICFkulJ4fw" target="_blank" rel="noopener noreferrer">
+						<img src="LINE.png" width="80" height="80"/>
+					</a>
+					<p class="caption">
+					ハザッス!!の研究室
+					</p>
+				</div>
+				<div class="lineex">
+					ハザッス!!遊厨部!!の動画や<br>
+					企画について話し合う場です!!
+				</div>
+				<br>
+				<div class="lineicon">
+					<a href="https://line.me/ti/g2/ASvmXespGrhqGPhgP32nUw" target="_blank" rel="noopener noreferrer">
+						<img src="LINE.png" width="80" height="80"/>
+					</a>
+					<p class="caption">
+					【リベロの部室】<br>情報伝達部!!
+					</p>
+				</div>
+				<div class="lineex">
+					動画の投稿についての連絡や<br>
+					投稿予定の動画の告知、リベロ<br>
+					が今力を入れている企画などを<br>
+					"いち早く"お知らせします！！
+				</div>
+			</div>
+		</div>
+		<div id="latestvideo">
+			<h1 class="head-border">物置場</h1>
+			<div class="text" style="text-align: left">
+				<a href="memo/">ここ</a>
+				<br>
+				<br>
+				<br>
+			</div>
+		</div>
+		<div id="line">
+			<hr class="mpart">
+		</div>
+		<footer>
+			お問い合わせ: hz819lilan＠gmail.com
+			<br>
+			Copyright &copy; 2020-2021 <a href="https://twitter.com/leelan324" target="_blank" rel="noopener noreferrer">leelan324</a> All Rights Reserved.
+		</footer>
+	</body>
+</html>
