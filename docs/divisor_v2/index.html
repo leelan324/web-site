@@ -6,7 +6,7 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="default">
 		<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 		<link rel="icon" href="favicon.ico">
-		<title>約数計算機v2</title>
+		<title>約数計算機 v3</title>
 		<link rel="manifest" href="manifest.json">
 		<script>
 		if ('serviceWorker' in navigator) {
@@ -35,7 +35,7 @@
 		</style>
 	</head>
 	<body>
-		<h1 class="title">約数計算機v2</h1>
+		<h1 class="title">約数計算機 v3</h1>
 		<p>自然数を入力してください！</p>
 		<input type="number" id="num" step="1" />
 		<input type="button" value="実行" onclick="clickBtn1()" />
@@ -44,8 +44,8 @@
 		<script>
 			function clickBtn1(){
 				document.getElementById("s1").textContent = "";
-				const a = document.getElementById("num").value;
-				if(a <= 0){
+				const a = Number(document.getElementById("num").value);
+				if(a <= 0 || Number.isInteger(a) == false){
 					const s1 = document.getElementById("s1");
 					s1.insertAdjacentHTML("beforeend","自然数は1,2,3,...といった数字です！<br>");
 				}else if(a > 100000000){

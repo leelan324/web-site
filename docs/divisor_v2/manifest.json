@@ -1,7 +1,7 @@
 {
-  "name"              : "約数計算機v2",
-  "short_name"        : "約数v2",
-  "description"       : "約数計算機v2",
+  "name"              : "約数計算機 v3",
+  "short_name"        : "約数v3",
+  "description"       : "約数計算機 v3",
   "start_url"         : "index.html",
   "display"           : "standalone",
   "background_color"  : "#fff",

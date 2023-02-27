@@ -1,5 +1,5 @@
 //キャッシュ名
-var CACHE_NAME  = "約数v2-PWA";
+var CACHE_NAME  = "約数v3-PWA";
 
 //キャッシュするファイル名
 var urlsToCache = [
