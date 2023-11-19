@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<!-- Ver.3.1.0 -->
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+		<meta name="apple-mobile-web-app-status-bar-style" content="default">
+		<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+		<link rel="icon" href="favicon.ico">
+		<title>約数計算機 v3</title>
+		<link rel="manifest" href="manifest.json">
+		<script>
+		if ('serviceWorker' in navigator) {
+    	navigator.serviceWorker.register('service-worker.js').then(function(registration) {
+        	console.log('ServiceWorker registration successful with scope: ', registration.scope);
+		}).catch(function(err) {
+        	console.log('ServiceWorker registration failed: ', err);
+    	});
+    	}
+		</script>
+		<style>
+			body{
+				font-family: "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Meiryo", "sans-serif";
+				font-size: 24px;
+				background-color: #99FF99;
+			}
+			.title{
+				text-align: center;
+			}
+			input{
+				font-size: 24px;
+			}
+			#num{
+				width: 200px;
+			}
+		</style>
+	</head>
+	<body>
+		<h1 class="title">約数計算機 v3</h1>
+		<p>自然数を入力してください！<br>※数が大きいと計算に時間がかかります。</p>
+		<input type="number" id="num" step="1" />
+		<input type="button" value="実行" onclick="clickBtn1()" />
+		<br><br>
+		<div id="s1"></div>
+		<script>
+			function clickBtn1(){
+				document.getElementById("s1").textContent = "";
+				const a = Number(document.getElementById("num").value);
+				const s1 = document.getElementById("s1");
+				if(a <= 0 || Number.isInteger(a) == false){
+					s1.insertAdjacentHTML("beforeend","自然数は1,2,3,...といった数字です！<br>");
+				}else if(a > 100000000){
+					s1.insertAdjacentHTML("beforeend","数が大きすぎます！<br>");
+				}else{
+					s1.insertAdjacentHTML("beforeend","計算結果は<br>");
+					let i;
+					let j = 0;
+					for(let i = 1; i <= a; i++){
+						if(a%i == 0){
+							s1.insertAdjacentHTML("beforeend","・"+i+"<br>");
+							j++;
+						}
+					}
+					s1.insertAdjacentHTML("beforeend","です！<br><br>");
+					let prime;
+					if(j == 2){
+						prime = "素数";
+					}else{
+						prime = "素数ではない";
+					}
+					s1.insertAdjacentHTML("beforeend","ちなみに...<br>");
+					s1.insertAdjacentHTML("beforeend","「"+a+"」は"+prime+"！<br><br>");
+				}
+			}
+			function keypress_ivent(e){
+				if(e.code === 'Enter'){
+					clickBtn1();
+				}
+			}
+			document.addEventListener('keypress', keypress_ivent);
+		</script>
+	</body>
+</html>

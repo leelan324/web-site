@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<!-- Ver.1.0.3 -->
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+		<meta name="apple-mobile-web-app-status-bar-style" content="default">
+		<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+		<link rel="icon" href="favicon.ico">
+		<title>和暦・西暦変換</title>
+		<link rel="manifest" href="manifest.json">
+		<script>
+		if ('serviceWorker' in navigator) {
+    	navigator.serviceWorker.register('service-worker.js').then(function(registration) {
+        	console.log('ServiceWorker registration successful with scope: ', registration.scope);
+		}).catch(function(err) {
+        	console.log('ServiceWorker registration failed: ', err);
+    	});
+    	}
+		</script>
+		<style>
+			body{
+				font-family: "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Meiryo", "sans-serif";
+				font-size: 24px;
+				background-color: #FFDF97;
+			}
+			.title{
+				text-align: center;
+			}
+			input{
+				height: 40px;
+				font-size: 24px;
+			}
+			#calendar_mode{
+				height: 36px;
+				font-size: 18px;
+			}
+			#num{
+				width: 100px;
+			}
+		</style>
+	</head>
+	<body>
+		<h1 class="title">和暦・西暦変換</h1>
+		<p>形式と数字を入力してください。<br>※「元年」は「1」と入力してください。<br>※「自動識別」では令和/西暦を識別します。</p>
+		<div>
+			<select name="mode" id="calendar_mode">
+				<option value="auto" selected>自動識別</option>
+				<option value="a">西暦</option>
+				<option value="r">令和</option>
+				<option value="h">平成</option>
+				<option value="s">昭和</option>
+				<option value="t">大正</option>
+				<option value="m">明治</option>
+				<option value="k">慶応</option>
+			</select>
+			<input type="number" id="num" step="1" min="1"/>
+			<input type="button" value="変換" onclick="btn()" />
+		</div>
+		<br>
+		<div id="status"></div>
+		<div id="result"></div>
+		<script>
+			function btn(){
+				const num = Number(document.getElementById("num").value);
+				document.getElementById("result").textContent = "";
+				const result = document.getElementById("result");
+				if(num <= 0 || Number.isInteger(num) == false){
+					result.insertAdjacentHTML("beforeend","1以上の整数を指定してください。");
+				}else{
+					main(num, result);
+				}
+			}
+
+			function main(num, result){
+				const list = []
+				
+				// 入力形式検出
+				const calendar_mode = document.getElementById("calendar_mode");
+				if(calendar_mode.value == "auto"){
+					if(num <= 100){
+						// 令和と判断
+						list.push(-2018, 0, -30, -93, -107, -151, -154);
+					}else{
+						// 西暦と判断
+						list.push(0, 2018, 1988, 1925, 1911, 1867, 1864);
+					}
+				}else if(calendar_mode.value == "a"){
+					list.push(0, 2018, 1988, 1925, 1911, 1867, 1864);
+				}else if(calendar_mode.value == "r"){
+					list.push(-2018, 0, -30, -93, -107, -151, -154);
+				}else if(calendar_mode.value == "h"){
+					list.push(-1988, 30, 0, -63, -77, -121, -124);
+				}else if(calendar_mode.value == "s"){
+					list.push(-1925, 93, 63, 0, -14, -58, -61);
+				}else if(calendar_mode.value == "t"){
+					list.push(-1911, 107, 77, 14, 0, -44, -47);
+				}else if(calendar_mode.value == "m"){
+					list.push(-1867, 151, 121, 58, 44, 0, -3);
+				}else if(calendar_mode.value == "k"){
+					list.push(-1864, 154, 124, 61, 47, 3, 0);
+				}
+
+				// 西暦
+				const a = convert_ad(num, list[0]);
+				result.insertAdjacentHTML("beforeend","西暦 "+a+"年<br>");
+				// 令和
+				const r = convert(num, list[1]);
+				result.insertAdjacentHTML("beforeend","令和 "+r+"<br>");
+				// 平成
+				const h = convert(num, list[2]);
+				result.insertAdjacentHTML("beforeend","平成 "+h+"<br>");
+				// 昭和
+				const s = convert(num, list[3]);
+				result.insertAdjacentHTML("beforeend","昭和 "+s+"<br>");
+				// 大正
+				const t = convert(num, list[4]);
+				result.insertAdjacentHTML("beforeend","大正 "+t+"<br>");
+				// 明治
+				const m = convert(num, list[5]);
+				result.insertAdjacentHTML("beforeend","明治 "+m+"<br>");
+				// 慶応
+				const k = convert(num, list[6]);
+				result.insertAdjacentHTML("beforeend","慶応 "+k+"<br>");
+
+				const today = new Date();
+				const year = today.getFullYear();
+				let yd = year - a;
+				if(yd < 0){
+					yd *= -1;
+					result.insertAdjacentHTML("beforeend","<br>今年("+year+"年)から見て"+yd+"年後です。<br>");
+				}else if(yd == 0){
+					result.insertAdjacentHTML("beforeend","<br>今年("+year+"年)です。<br>");
+				}else if(0 < yd){
+					result.insertAdjacentHTML("beforeend","<br>今年("+year+"年)から見て"+yd+"年前です。<br>");
+				}
+			}
+
+			function convert_ad(data, diff){
+				let r = data - diff;
+				return r;
+			}
+
+			function convert(data, diff){
+				let r = data - diff;
+				if(r < 1){
+					r = "以前";
+				}else if(r == 1){
+					r = "元年";
+				}else{
+					r += "年";
+				}
+				return r;
+			}
+
+			function keypress_ivent(e){
+				if(e.code === 'Enter'){
+					btn();
+				}
+			}
+
+			document.addEventListener('keypress', keypress_ivent);
+		</script>
+	</body>
+</html>

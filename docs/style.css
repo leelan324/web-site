@@ -1,0 +1,97 @@
+body {
+    font-family: "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Meiryo", "sans-serif";
+    background-color: #fff;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #000;
+        color: #fff;
+    }
+}
+
+.mpart {
+    border-width: 0;
+    height: 2px;
+    background-color: #000;
+    content: "";
+    display: block;
+}
+
+@media (prefers-color-scheme: dark) {
+    .mpart {
+        background-color: #fff;
+    }
+}
+
+.head-border {
+    margin-right: auto;
+    margin-left: auto;
+    width: 75%;
+    display: flex;
+    align-items: center;
+    font-size: 42px;
+}
+
+@media only screen and (max-device-width: 750px) {
+    .head-border {
+        width: 100%;
+        font-size: 32px;
+    }
+}
+
+.head-border:before,
+.head-border:after {
+    content: "";
+    height: 3px;
+    flex-grow: 1;
+    background-color: #00ffff;
+}
+
+.head-border:before {
+    margin-right: 1rem;
+}
+
+.head-border:after {
+    margin-left: 1rem;
+}
+
+.title {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-size: 100px;
+}
+
+@media only screen and (max-device-width: 750px) {
+    .title {
+        font-size: 80px;
+    }
+}
+
+.text {
+    margin-right: auto;
+    margin-left: auto;
+    width: 75%;
+    text-align: center;
+    font-size: 24px;
+}
+
+@media only screen and (max-device-width: 750px) {
+    .text {
+        width: 100%;
+        font-size: 16px;
+    }
+}
+
+footer {
+    text-align: center;
+}
+
+@media only screen and (max-device-width: 750px) {
+    footer {
+        font-size: 11px;
+    }
+}

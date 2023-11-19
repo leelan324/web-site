@@ -1,0 +1,45 @@
+body {
+    font-family: "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Meiryo", "sans-serif";
+}
+.center {
+    text-align: center;
+}
+h1 {
+    font-size: 48px;
+}
+#note {
+    color: #f00;
+}
+#exp1 {
+    font-size: 28px;
+}
+#dist {
+    font-size: 80px;
+    max-height: 100px;
+}
+#km {
+    font-size: 42px;
+}
+#exp2 {
+    font-size: 18px;
+}
+#timer {
+    font-size: 54px;
+}
+#btn {
+    font-size: 24px;
+    width: 170px;
+    height: 80px;
+}
+#reset {
+    font-size: 24px;
+    width: 170px;
+    height: 80px;
+}
+#label {
+    text-align: center;
+}
+#temp {
+    text-align: right;
+    width: 50px;
+}

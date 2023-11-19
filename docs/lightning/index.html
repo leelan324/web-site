@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <!-- Ver.1.0.1 -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+        <meta name="apple-mobile-web-app-status-bar-style" content="default">
+		<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+		<link rel="icon" href="favicon.ico">
+        <title>落雷距離計算機</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="manifest" href="manifest.json">
+        <script>
+            if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('service-worker.js').then(function(registration) {
+                console.log('ServiceWorker registration successful with scope: ', registration.scope);
+            }).catch(function(err) {
+                console.log('ServiceWorker registration failed: ', err);
+            });
+            }
+        </script>
+    </head>
+    <body>
+        <h1 class="center">落雷距離計算機</h1>
+        <p id="note">雷鳴が遠くから聞こえる場合でも危険な場合があります。頑丈な建物の中に入り、安全確保に努めてください。<br>雷の状況など気象情報は、気象庁の<a href="https://www.jma.go.jp/bosai/nowc/#lat:34.506557/lon:137.021484/zoom:5/colordepth:normal/elements:slmcs&thns&liden">サイト</a>で確認することができます。</p><br>
+        <div id="exp1" class="center">【落雷位置までの距離】</div>
+        <div id="dist" class="center">00000m</div>
+        <div id="km" class="center">(0.0km)</div><br>
+        <div id="exp2" class="center">【光ってから音が聞こえるまでの時間】</div>
+        <div id="timer" class="center">00:00.00</div><br>
+        <div id="btns" class="center">
+            <button id="btn">　光った　</button>
+            <button id="reset">リセット</button>
+        </div><br>
+        <div id="exp3" class="center">――――――――音速設定――――――――</div>
+        <div id="label">
+            <label>
+                気温：
+                <input id="temp" type="number" value="15">
+                [℃]　
+                <button id="tbtn">変更</button>
+            </label>
+            <p id="sspeed">現在設定：気温 15℃ / 音速 340.6m/s</p>
+        </div>
+        <script type="text/javascript" src="script.js"></script>
+    </body>
+</html>
