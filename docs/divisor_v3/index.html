@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 	<head>
-		<!-- Ver.3.1.0 -->
+		<!-- Ver.3.2.0 -->
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
 		<meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -48,28 +48,46 @@
 				const a = Number(document.getElementById("num").value);
 				const s1 = document.getElementById("s1");
 				if(a <= 0 || Number.isInteger(a) == false){
-					s1.insertAdjacentHTML("beforeend","自然数は1,2,3,...といった数字です！<br>");
+					s1.insertAdjacentHTML("beforeend", "自然数は1,2,3,...といった数字です！<br>");
 				}else if(a > 100000000){
-					s1.insertAdjacentHTML("beforeend","数が大きすぎます！<br>");
+					s1.insertAdjacentHTML("beforeend", "数が大きすぎます！<br>");
 				}else{
-					s1.insertAdjacentHTML("beforeend","計算結果は<br>");
-					let i;
+					s1.insertAdjacentHTML("beforeend", "計算結果は<br>");
 					let j = 0;
+					let k = 0;
 					for(let i = 1; i <= a; i++){
 						if(a%i == 0){
-							s1.insertAdjacentHTML("beforeend","・"+i+"<br>");
+							s1.insertAdjacentHTML("beforeend", "・"+i+"<br>");
 							j++;
+							if (i != a){
+								k += i;
+							}
 						}
 					}
-					s1.insertAdjacentHTML("beforeend","です！<br><br>");
-					let prime;
+					s1.insertAdjacentHTML("beforeend", "です！<br><br>");
+					let prime = "素数ではない";
 					if(j == 2){
 						prime = "素数";
-					}else{
-						prime = "素数ではない";
 					}
-					s1.insertAdjacentHTML("beforeend","ちなみに...<br>");
-					s1.insertAdjacentHTML("beforeend","「"+a+"」は"+prime+"！<br><br>");
+					let perfect = "完全数ではない";
+					if(k == a){
+						perfect = "完全数";
+					}
+					let mersenne = "メルセンヌ数ではない";
+					for(let l = 1; l <= 26; l++){
+						if(a + 1 == 2**l){
+							if(j == 2){
+								mersenne = "メルセンヌ素数";
+							}else{
+								mersenne = "メルセンヌ数";
+							}
+							break;
+						}
+					}
+					s1.insertAdjacentHTML("beforeend", "ちなみに...<br>");
+					s1.insertAdjacentHTML("beforeend", "「"+a+"」は"+prime+"！<br>");
+					s1.insertAdjacentHTML("beforeend", "「"+a+"」は"+perfect+"！<br>");
+					s1.insertAdjacentHTML("beforeend", "「"+a+"」は"+mersenne+"！<br><br>");
 				}
 			}
 			function keypress_ivent(e){

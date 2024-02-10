@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 	<head>
-		<!-- Ver.1.1.0 -->
+		<!-- Ver.1.2.0 -->
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 		<meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -29,23 +29,23 @@
     	}
 		</script>
 		<style>
-			body{
+			body {
 				font-family: "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Meiryo", "sans-serif";
 				font-size: 24px;
 				background-color: #FFDF97;
 			}
-			.title{
+			.title {
 				text-align: center;
 			}
-			input{
+			input {
 				height: 40px;
 				font-size: 24px;
 			}
-			#calendar_mode{
+			#calendar_mode {
 				height: 36px;
 				font-size: 18px;
 			}
-			#num{
+			#num {
 				width: 100px;
 			}
 		</style>
@@ -66,6 +66,7 @@
 			</select>
 			<input type="number" id="num" step="1" min="1"/>
 			<input type="button" value="変換" onclick="btn()" />
+			<input type="button" value="今年" onclick="ty()" />
 		</div>
 		<br>
 		<div id="status"></div>
@@ -76,10 +77,20 @@
 				document.getElementById("result").textContent = "";
 				const result = document.getElementById("result");
 				if(num <= 0 || Number.isInteger(num) == false){
-					result.insertAdjacentHTML("beforeend","1以上の整数を指定してください。");
+					result.insertAdjacentHTML("beforeend", "1以上の整数を指定してください。");
 				}else{
 					main(num, result);
 				}
+			}
+
+			function ty(){
+				document.getElementById("result").textContent = "";
+				const today = new Date();
+				const year = today.getFullYear();
+				const result = document.getElementById("result");
+				const select =document.getElementById("calendar_mode").options[1].selected = true;
+				document.getElementById("num").value = year;
+				main(year, result);
 			}
 
 			function main(num, result){
