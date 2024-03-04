@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
     <head>
-        <!-- Ver.1.0.0 -->
+        <!-- Ver.1.0.1 -->
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
         <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -51,11 +51,13 @@
                 width: 300px;
                 height: 200px;
                 margin-bottom: 5px;
+                text-align: center;
             }
             .btn2 {
                 width: 300px;
                 height: 40px;
                 margin-bottom: 5px;
+                text-align: center;
             }
             .line {
                 margin-right: auto;
@@ -117,13 +119,11 @@
                 <input type="number" id="incNum" class="num" step="1" value="1"/>
             </div>
             <div>
-                <label for="unit"><input type="checkbox" id="unit" />単位表示</label>
-                　単位
+                単位　　
                 <input type="text" id="unitName" class="num"/>
             </div>
             <div>
-                <label for="zero"><input type="checkbox" id="zero" checked />ゼロ埋め</label>
-                　桁数
+                ゼロ埋め
                 <input type="number" id="zeroNum" class="num" step="1" min="1" max="8" value="6"/>
             </div>
             <div><label for="com"><input type="checkbox" id="com" checked />カンマ</label></div>
@@ -156,19 +156,18 @@
                 const order = document.getElementById("order").value;
                 let text;
                 if (notice_mode.value === "o1") {
-                    console.log(Number(count_num) === Number(order));
-                    if (Number(count_num) == Number(order)) {
+                    if ((Number(count_num) === Number(order)) && (order !== "")) {
                         text = "指定された条件「条件値\"" + order + "\"と等しい」になりました。";
                         AlertNotice(text);
                     }
                 } else if (notice_mode.value === "o2") {
-                    if (Number(count_num) % Number(order) === 0) {
+                    if ((Number(count_num) % Number(order) === 0) && (order !== "")) {
                         text = "指定された条件「条件値\"" + order + "\"の倍数」になりました。";
                         AlertNotice(text);
                     }
                     
                 } else if (notice_mode.value === "o3") {
-                    if (Number(order) % Number(count_num) === 0) {
+                    if ((Number(order) % Number(count_num) === 0) && (order !== "")) {
                         text = "指定された条件「条件値\"" + order + "\"の約数」になりました。";
                         AlertNotice(text);
                     }
@@ -186,24 +185,13 @@
                 }
             }
             function display() {
-                const unit = document.getElementById("unit");
                 const unitName = document.getElementById("unitName").value;
-                const zero = document.getElementById("zero");
                 const zeroNum = document.getElementById("zeroNum").value;
                 const com = document.getElementById("com");
                 const cntNum = document.getElementById("cntNum"); 
-                let num_a = count_num.toString().replace("-", "");
-                if (zero.checked) {
-                    num_a = num_a.padStart(zeroNum, '0');
-                }
-                if (com.checked) {
-                    num_a = num_a.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-                }
+                let num_a = count_num.toString().replace("-", "").padStart(zeroNum, '0').replace(/\B(?=(\d{3})+(?!\d))/g, ',') + unitName;
                 if (count_num < 0) {
                     num_a = "-" + num_a;
-                }
-                if (unit.checked) {
-                    num_a += unitName;
                 }
                 cntNum.textContent = num_a;
                 check();
