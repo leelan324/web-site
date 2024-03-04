@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <!-- Ver.1.0.0 -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+        <meta name="apple-mobile-web-app-status-bar-style" content="default">
+		<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+		<link rel="icon" href="favicon.ico">
+        <title>counter</title>
+        <link rel="manifest" href="manifest.json">
+		<script>
+		if ('serviceWorker' in navigator) {
+    	navigator.serviceWorker.register('service-worker.js').then(function(registration) {
+        	console.log('ServiceWorker registration successful with scope: ', registration.scope);
+		}).catch(function(err) {
+        	console.log('ServiceWorker registration failed: ', err);
+    	});
+    	}
+		</script>
+        <style>
+			body {
+				font-family: "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Meiryo", "sans-serif";
+				font-size: 24px;
+				background-color: #B4E1FF;
+                margin-right: auto;
+                margin-left: auto;
+                width: 75%;
+			}
+            @media only screen and (max-device-width: 750px) {
+                body {
+                    width: 95%;
+                    /* font-size: 16px; */
+                }
+            }
+			.title {
+				text-align: center;
+			}
+            #cntNum {
+                font-size: 80px;
+                text-align: center;
+            }
+            .btns {
+                text-align: center;
+            }
+            input {
+				font-size: 24px;
+			}
+            .btn1 {
+                font-size: 60px;
+                width: 300px;
+                height: 200px;
+                margin-bottom: 5px;
+            }
+            .btn2 {
+                width: 300px;
+                height: 40px;
+                margin-bottom: 5px;
+            }
+            .line {
+                margin-right: auto;
+                margin-left: auto;
+                display: flex;
+                align-items: center;
+            }
+            .line:before,
+            .line:after {
+                content: "";
+                height: 2px;
+                flex-grow: 1;
+                background-color: #000;
+            }
+            .line:before {
+                margin-right: 1rem;
+            }
+            .line:after {
+                margin-left: 1rem;
+            }
+            .set {
+                text-align: left;
+            }
+            .mode {
+                font-size: 24px;
+                margin-bottom: 2px;
+            }
+            .num {
+                width: 140px;
+            }
+		</style>
+    </head>
+    <body>
+        <h1 class="title">カウンター</h1>
+        <p>カウントします。</p>
+		<div id="cntNum">000000</div>
+        <br>
+        <div class="btns">
+            <input type="button" class="btn1" value="カウント" onclick="count()" />
+            <br>
+            <input type="button" class="btn2" value="逆カウント" onclick="reverse()" />
+            <br>
+		    <input type="button" class="btn2" value="リセット" onclick="reset()" />
+        </div>
+        <p class="line">設定</p>
+        <div class="set">
+            <div>
+                <select name="count_mode" id="count_mode" class="mode">
+                    <option value="plus" selected>加算</option>
+                    <option value="minus">減算</option>
+                </select>
+                <br>
+                　初期値
+                <input type="number" id="initNum" class="num" step="1" value="0"/>
+                <br>
+                　※リセットで反映
+                <br>
+                　増減量
+                <input type="number" id="incNum" class="num" step="1" value="1"/>
+            </div>
+            <div>
+                <label for="unit"><input type="checkbox" id="unit" />単位表示</label>
+                　単位
+                <input type="text" id="unitName" class="num"/>
+            </div>
+            <div>
+                <label for="zero"><input type="checkbox" id="zero" checked />ゼロ埋め</label>
+                　桁数
+                <input type="number" id="zeroNum" class="num" step="1" min="1" max="8" value="6"/>
+            </div>
+            <div><label for="com"><input type="checkbox" id="com" checked />カンマ</label></div>
+            <div><label for="full"><input type="checkbox" id="key" checked />キーボード使用</label></div>
+            ※カウント　：Enter
+            <br>
+            　逆カウント：-(マイナス)
+            <br>
+            　リセット　：0
+            <div><label for="full"><input type="checkbox" id="full" />全体ボタンモード</label></div>
+            <div><label for="alert"><input type="checkbox" id="alert" />条件でアラートを表示</label></div>
+            <div><label for="notice"><input type="checkbox" id="notice" />条件で通知を表示</label></div>
+            <div>
+                <select name="notice_mode" id="notice_mode" class="mode">
+                    <option value="order" selected>条件</option>
+                    <option value="o1">条件値と等しい</option>
+                    <option value="o2">条件値の倍数</option>
+                    <option value="o3">条件値の約数</option>
+                </select>
+                <br>
+                　条件値
+                <input type="number" id="order" class="num" value=""/>
+            </div>
+        </div>
+        <script>
+            let count_num = Number(document.getElementById("initNum").value);           
+            const noticeCbox = document.getElementById("notice");
+            function check() {
+                const notice_mode = document.getElementById("notice_mode");
+                const order = document.getElementById("order").value;
+                let text;
+                if (notice_mode.value === "o1") {
+                    console.log(Number(count_num) === Number(order));
+                    if (Number(count_num) == Number(order)) {
+                        text = "指定された条件「条件値\"" + order + "\"と等しい」になりました。";
+                        AlertNotice(text);
+                    }
+                } else if (notice_mode.value === "o2") {
+                    if (Number(count_num) % Number(order) === 0) {
+                        text = "指定された条件「条件値\"" + order + "\"の倍数」になりました。";
+                        AlertNotice(text);
+                    }
+                    
+                } else if (notice_mode.value === "o3") {
+                    if (Number(order) % Number(count_num) === 0) {
+                        text = "指定された条件「条件値\"" + order + "\"の約数」になりました。";
+                        AlertNotice(text);
+                    }
+                }
+            }
+            function AlertNotice(text) {
+                const alertCbox = document.getElementById("alert");
+                if (alertCbox.checked) {
+                    setTimeout(() => {
+                        alert(text);
+                    }, 1);
+                }
+                if (noticeCbox.checked) {
+                    notice(text);
+                }
+            }
+            function display() {
+                const unit = document.getElementById("unit");
+                const unitName = document.getElementById("unitName").value;
+                const zero = document.getElementById("zero");
+                const zeroNum = document.getElementById("zeroNum").value;
+                const com = document.getElementById("com");
+                const cntNum = document.getElementById("cntNum"); 
+                let num_a = count_num.toString().replace("-", "");
+                if (zero.checked) {
+                    num_a = num_a.padStart(zeroNum, '0');
+                }
+                if (com.checked) {
+                    num_a = num_a.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                }
+                if (count_num < 0) {
+                    num_a = "-" + num_a;
+                }
+                if (unit.checked) {
+                    num_a += unitName;
+                }
+                cntNum.textContent = num_a;
+                check();
+            }
+            function count() {
+                const count_mode = document.getElementById("count_mode");
+                if (count_mode.value === "plus") {
+                    count_num += Number(document.getElementById("incNum").value);
+                } else {
+                    count_num -= Number(document.getElementById("incNum").value);
+                }
+                display();     
+            }
+            function reverse() {
+                const count_mode = document.getElementById("count_mode");
+                if (count_mode.value === "minus"){
+                    count_num += Number(document.getElementById("incNum").value);
+                } else {
+                    count_num -= Number(document.getElementById("incNum").value);
+                }
+                display();
+            }
+            function reset() {
+                const ok = window.confirm("本当にカウンターをリセットしますか？\nこの操作は取り消せません。");
+                if (ok) {
+                    count_num = Number(document.getElementById("initNum").value);
+                    display();
+                }
+            }
+            function notice(text) {
+                if (Notification.permission === "granted") {
+			  		navigator.serviceWorker.ready.then(registration => {
+						registration.showNotification("【カウンター通知】", {
+							body: text
+						});
+			  		});
+				}
+            }
+            document.addEventListener("click", (event) => {
+                const full = document.getElementById("full");
+                if (full.checked) {
+                    const name = event.target.tagName.toLowerCase();
+                    if (name !== "label" && name !== "input" && name !== "select" && name !== "option") {
+                        count();
+                    }
+                } 
+            })
+            document.addEventListener("keypress", (event) => {
+                const key = document.getElementById("key");
+                if (key.checked && (document.activeElement === document.body)) {
+                    const name = event.code;
+                    if (name === "Enter") {
+                        count();
+                    } else if (name === "Minus") {
+                        reverse();
+                    } else if (name === "Digit0") {
+                        reset();
+                    }
+                } 
+            })
+            document.addEventListener("change", () => display())
+            noticeCbox.addEventListener("change", () => {
+  				if (!("Notification" in window)) {
+    				alert("【Error】\nこのブラウザは通知に対応していません。");
+  				} else if (Notification.permission !== "denied") {
+    				Notification.requestPermission().then((permission) => {
+      					if (permission === "granted") {
+        					navigator.serviceWorker.ready.then(registration => {
+								registration.showNotification("【カウンター通知】", {
+									body: "通知が許可されました。"
+								});
+			  				});
+      					}
+    				});
+  				}
+            })
+            display();
+        </script>
+    </body>
+</html>
